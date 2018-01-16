@@ -4,12 +4,16 @@ import './App.css';
 
 class App extends Component {
   state = {
-    response: ''
+    question: '',
+    answer: ''
   };
 
   componentDidMount() {
     this.callApi()
-      .then(res => this.setState({response: res.name}))
+      .then(res => {
+        this.setState({question: res.card.question});
+        this.setState({answer: res.card.answer});
+      })
       .catch(err => console.log(err));
   }
 
@@ -30,7 +34,8 @@ class App extends Component {
           <h1 className="App-title">Welcome to React</h1>
         </header>
         <p className="App-intro">
-          {this.state.response}
+          {this.state.question}
+          {this.state.answer}
         </p>
       </div>
     );
